@@ -1,39 +1,28 @@
-import { useState } from "react";
-import cities from "../../data/cities.json";
-import SearchBar from "../SearchBar/SearchBar";
-import TripList from "../TripList/TripList";
-import PortalModal from "../PortalModal/PortalModal";
-import WeatherForTripDays from "../ForecastList/ForecastList";
-import WeatherForToday from "../WeatherForToday/WeatherForToday";
-// import { fetchCityWeatherForToday, fetchCityWeatherForDays } from "./api";
+// import api from "./api";
+import { lazy } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import AppLayout from "../AppLayout";
+
+const Home = lazy(() => import("../../pages/Home/Home"));
+const WeatherForCity = lazy(() =>
+  import("../../pages/WeatherForCity/WeatherForCity")
+);
 
 //raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Monochrome/snow.png - шлях до іконди прогнозу погоди
 
-function App() {
-  const [query, setQuery] = useState("");
-  const [tripList, 
-    // setTripList
-  ] = useState([...cities]);
-  // fetchCityWeatherForToday();
-  // fetchCityWeatherForDays();
+const App = () => {
+  // api.fetchCityWeatherForToday();
+  // api.fetchCityWeatherForDays();
 
   return (
-    <>
-      <SearchBar
-        query={query}
-        onChange={(e) => {
-          setQuery(e.target.value);
-        }}
-      />
-
-      <main>
-        <TripList cities={tripList} />
-        <PortalModal />
-        <WeatherForTripDays />
-        <WeatherForToday />
-      </main>
-    </>
+    <Routes>
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/:city" element={<WeatherForCity />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
-}
+};
 
 export default App;
