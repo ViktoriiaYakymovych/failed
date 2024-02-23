@@ -39,16 +39,13 @@ const fetchCityWeatherForToday = async (controller, city = "Berlin") => {
 
 const fetchCityWeatherForDays = async (
   controller,
-  city = "Berlin",
-  startDate = "2024-02-20",
-  endDate = "2024-02-25"
+  city = "Berlin"
 ) => {
   try {
     const { data } = await axios.get(
-      `/timeline/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${API_KEY}&contentType=json`,
+      `/timeline/${city}/next7days?unitGroup=metric&include=days&key=${API_KEY}&contentType=json`,
       { signal: controller.signal }
     );
-    console.log(data);
     return data;
   } catch (error) {
     if (error.code !== "ERR_CANCELED") {

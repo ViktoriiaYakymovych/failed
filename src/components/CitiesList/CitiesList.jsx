@@ -10,7 +10,7 @@ const CitiesList = ({ weatherList }) => {
           <li key={city.address}>
             <h3>{city.address}</h3>
             <img
-              src={`https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Monochrome/${city.days[0].icon}.png`}
+              src={`https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Color/${city.days[0].icon}.png`}
               alt={city.days[0].icon}
             />
             <p>{city.days[0].conditions}</p>
